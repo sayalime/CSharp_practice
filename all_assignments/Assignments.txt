@@ -1,0 +1,344 @@
+1. Write C# code to declare and initialize a List of integers named "numberList". Add the following numbers to the list: 10, 20, 30, 40, and 50. Finally, print all the elements of the list.
+Ans=> 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment1
+{
+    internal class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            List<int> numberList = new List<int>() { 10,20,30,40,50};
+            foreach (int i in numberList)
+            {
+                Console.WriteLine(i);
+            }
+            Console.ReadKey();
+        }
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. In C#, how can you add an element to a List? Provide an example code snippet demonstrating the use of the Add method.
+Ans=>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment2
+{
+    internal class Program
+    {
+      
+        static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+            list.Add(10);
+            list.Add(20);
+            list.Add(30);
+            list.Add(40);
+            list.Add(50);
+            foreach (int i in list)
+            {
+                Console.WriteLine(i);
+            }
+            Console.ReadLine();
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Write a C# function named FindAverage that takes a List of integers as a parameter and returns the average of the numbers in the list. Use this function to find the average of the "numberList" from Question 1.
+Ans=>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment3
+{
+    internal class Program
+    {
+        int sum=0; 
+        public void FindAverage(List<int> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                sum += list[i];
+            }
+            Console.WriteLine(sum);
+            int average = sum / list.Count;
+            Console.WriteLine(average);
+        }
+        static void Main(string[] args)
+        {
+            List<int> numberList = new List<int>() { 10,20,30,40,50};
+            Program p = new Program();
+            p.FindAverage(numberList);
+            Console.ReadKey();
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Describe the difference between iterating through a List using a for loop and using a foreach loop. Provide examples for both approaches.
+Ans=>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> list = new List<string>() {"abc","pqr","lmn","stu"};
+            Console.WriteLine("Using for each loop");
+            foreach (string s in list)
+            {
+                Console.WriteLine( s);
+            }
+            Console.WriteLine("Using for loop");
+            for (int i=list.Count-1; i>0; i--)
+            {
+                Console.WriteLine(list[i]);
+            }
+            
+            Console.ReadLine();
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5. Write C# code to create a List of strings named "fruits". Add the following fruits to the list: "Apple", "Banana", "Orange", "Mango", and "Grapes". Then, write code to check if the list contains the fruit "Banana". If it does, remove "Banana" from the list; otherwise, add "Kiwi" to the list.
+ans=>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment5
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> fruits = new List<string>();
+            fruits.AddRange(new string[] { "Apple", "Banana", "Orange", "Mango", "Grapes" });
+            if (fruits.Contains("Banana"))
+            {
+                fruits.Remove("Banana");
+                Console.WriteLine("Removed");
+                foreach (string fruit in fruits)
+                {
+                    Console.WriteLine(fruit);
+                }
+            }
+            else
+            {
+                fruits.Add("Kivi");
+                Console.WriteLine("Added");
+                foreach(string fruit in fruits)
+                {
+                       Console.Write(fruit);
+                }
+            }
+            Console.ReadKey(); 
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------
+***  Hashtable *****
+
+Hashtable Implementation: Create a class named Hashtable that will implement the hashtable data structure. The hashtable should have the following methods:
+
+void Add(string key, object value): Adds a new key-value pair to the hashtable.
+object Get(string key): Retrieves the value associated with a given key.
+bool ContainsKey(string key): Checks if a given key exists in the hashtable.
+bool Remove(string key): Removes a key-value pair from the hashtable.
+Program Demonstration: Write a program that demonstrates the functionality of the Hashtable class. In your program, perform the following actions:
+
+Add several key-value pairs to the hashtable.
+Retrieve and display values associated with specific keys.
+Check if certain keys exist in the hashtable and display the results.
+Remove a few key-value pairs from the hashtable.
+Display the contents of the hashtable after making these changes.
+
+Ans=>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace hashtable_ass
+{
+    internal class Hashtable
+    {
+        private Dictionary<string, string> keyValue = new Dictionary<string, string>();
+        public void Add(String  key, String value)
+        {
+            keyValue[key] = value;
+        }
+        public object Get(String key)
+        {
+            return keyValue[key];
+            
+        }
+        public bool Contains(String key)
+        {
+            return keyValue.ContainsKey(key);
+
+        }
+        public bool Remove(String key)
+        {
+            return keyValue.Remove(key);
+        }
+        public void display()
+        {
+          
+            foreach (var item in keyValue)
+            {
+                Console.WriteLine("Value = {0}", item);
+            }
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+namespace hashtable_ass
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Hashtable hash = new Hashtable();
+            hash.Add("Name", "Sayali");
+            hash.Add("msg", "Hi");
+            hash.Add("fruit", "Mango");
+            hash.Add("1", "3");
+            Console.WriteLine("Original hashtable");
+            hash.display();
+            Console.WriteLine("---------------------------------------------------------------------------");
+            Console.WriteLine("Get method called : "+hash.Get("msg"));
+            Console.WriteLine("Contains method called : "+hash.Contains("Name"));
+            Console.WriteLine("Remove method called : "+hash.Remove("1"));
+            Console.WriteLine("---------------------------------------------------------------------------");
+            Console.WriteLine("Updated hashtable");
+            hash.display();
+            Console.ReadKey();
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------------------
+Assignment: File Handling in C#
+
+Task 1: Reading from a File
+
+Write a C# program that reads the contents of a text file named "input.txt" and displays its content on the console.
+
+Task 2: Writing to a File
+
+Write a C# program that takes user input and writes it to a new text file named "output.txt".
+
+Task 3: Copying a File
+
+Write a C# program that copies the content of one text file ("source.txt") to another file ("destination.txt").
+
+Task 4: Deleting a File
+
+Write a C# program that deletes a text file named "todelete.txt".
+
+Ans=>
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace files_ass1
+{
+    internal class Program
+    {
+        
+        public void Read()
+        { //Task 1: Reading from a File
+
+            string path = @"C:\input.txt";
+            if (File.Exists(path))
+            {
+                using (TextReader reader = File.OpenText(path))
+                {
+                    Console.WriteLine(reader.ReadToEnd());
+                }
+            }
+        }
+        public void Write()
+        {//Task 2: Writing to a File
+
+            string path = @"D:\new_file.txt";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+                using (TextWriter writer = File.CreateText(path))
+                {
+                    writer.WriteLine("hey");
+                    writer.WriteLine("Hello");
+                    writer.WriteLine("What's Up");
+                }
+            Console.WriteLine("The write method has been called successfully here");
+            
+        }
+        public void Copy()
+        {
+            string f1= @"D:\toDelete.txt";
+            string f2 = @"D:\copiedd_file.txt";
+            File.Copy(f1, f2);
+            Console.WriteLine("file copied");
+        }
+        public void Delete()
+        {
+            string path = @"D:\copied_file.txt";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Console.WriteLine("File Deleted");
+            }
+            else
+            {
+                Console.WriteLine("File not Exist");
+            }
+        }
+        static void Main(string[] args)
+        {
+           Program p=new Program();
+            p.Read();
+            p.Write();
+            //p.Copy();
+            //p.Delete();
+
+
+            Console.ReadLine();
+        }
+    }
+}

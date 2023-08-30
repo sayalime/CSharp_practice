@@ -1,0 +1,277 @@
+[------------------------------------------Assignment1----------------------------------------]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment1
+{
+    internal class BankAccount
+    {
+        private static int AccountNoc = 1;
+        private readonly int accountNo;
+
+        public string OwnerName { get; set; }
+        public decimal Balance { get; set; }
+
+        public BankAccount(string ownerName, decimal balance)
+        {
+            accountNo = AccountNoc++;
+            OwnerName = ownerName;
+            Balance = balance;
+        }
+
+        public void Deposit(decimal amt)
+        {
+            Balance = Balance + amt;
+            Console.WriteLine($"Deposited amount: {amt}. New balance: {Balance}");
+        }
+
+        public void Withdraw(decimal amt)
+        {
+            if (amt <= Balance)
+            {
+                Balance = Balance - amt;
+                Console.WriteLine($"Withdrawn amount: {amt}. New balance: {Balance}");
+            }
+            else
+            {
+                Console.WriteLine("Insufficient balance for withdrawal.");
+            }
+        }
+
+        public void Display()
+        {
+            Console.WriteLine($"Account Number: {accountNo}");
+            Console.WriteLine($"Owner Name: {OwnerName}\nBalance: {Balance}");
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Assignment1
+{
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            BankAccount ac1 = new BankAccount("Abc", 10000);
+
+            Console.WriteLine("Account Information:");
+            ac1.Display();
+
+            ac1.Deposit(100);
+            ac1.Withdraw(200);
+            Console.WriteLine("Updated Account Information:");
+            ac1.Display();
+            Console.ReadKey();
+        }
+    }
+}
+
+[-----------------------------------------Assignment 2-------------------------------------------------]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment2
+{
+    internal class Program
+    {
+        public class Student
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public double GPA { get; set; }
+
+            public void Display()
+            {
+               
+                   Console.WriteLine($"Name: {Name}, Age: {Age}, GPA: {GPA}");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of students: ");
+            int no_of_students = Convert.ToInt32(Console.ReadLine());
+
+            Student[] stud = new Student[no_of_students];
+
+            for (int i = 0; i < no_of_students; i++)
+            {
+                Console.Write($"Enter details for Student\n");
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Age: ");
+                int age = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("GPA: ");
+                double gpa = Convert.ToDouble(Console.ReadLine());
+
+                stud[i] = new Student { Name = name, Age = age, GPA = gpa };
+            }
+
+            Console.WriteLine("Student Details:");
+            foreach (var student in stud)
+            {
+                student.Display();
+            }Console.ReadKey();
+
+        }
+    }
+
+    
+}
+[-------------------------------------------------Assignment 3----------------------------------------------]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment3
+{
+    internal class Program
+    {
+        public int ProductId = 1;
+        public readonly int productId;
+        public string ProductName { get; set; }
+        public int Price { get; set; }
+        public int Quantity { get; set; }
+
+        public Program(string productName, int price, int quantity)
+        {
+            productId += ProductId;
+            ProductName = productName;
+            Price = price;
+            Quantity = quantity;
+        }
+
+        public void SellQuantity(int sold)
+        {
+            if (Quantity <= 0)
+            {
+                Console.WriteLine("Invalid Quantity");
+            }
+            else if (Quantity < sold)
+            {
+                Console.WriteLine("Not Enough Quantity to Sell");
+            }
+            else
+            {
+                Quantity -= sold;
+                Console.WriteLine($"Sold quantity: {sold}");
+            }
+        }
+
+        public void AddQuantity(int added)
+        {
+            if (added <= 0)
+            {
+                Console.WriteLine("Invalid quantity to add");
+            }
+            else
+            {
+                Quantity += added;
+                Console.WriteLine($"Restocked quantity: {added}");
+            }
+        }
+
+        public void Display()
+        {
+            Console.WriteLine($"Product Id: {ProductId} \nProduct Name: {ProductName} \nProduct Price: {Price} \nProduct Quantity: {Quantity}");
+        }
+
+        static void Main(string[] args)
+        {
+            Program p = new Program("phone", 30000, 10);
+            p.Display();
+            Console.WriteLine("After selling a product, updated quantity:");
+            p.SellQuantity(2);
+            p.Display();
+            Console.WriteLine("After adding product quantity, restocked quantity:");
+            p.AddQuantity(3);
+            p.Display();
+            Console.ReadKey();
+        }
+    }
+}
+[---------------------------------------------------Assignment 4-------------------------------------------------]
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment4
+{
+    // Temperature Converter with Properties
+
+    internal class TemperatureConverter
+    {
+        private double celsius;
+        private double fahrenheit;
+
+        public double Celsius
+        {
+            get { return celsius; }
+            set
+            {
+                celsius = value;
+                fahrenheit = CelsiusToFahrenheit(value);
+            }
+        }
+
+        public double Fahrenheit
+        {
+            get { return fahrenheit; }
+            set
+            {
+                fahrenheit = value;
+                celsius = FahrenheitToCelsius(value);
+            }
+        }
+
+        public TemperatureConverter(double celsius)
+        {
+            Celsius = celsius;
+        }
+
+        public static double CelsiusToFahrenheit(double celsius)
+        {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        public static double FahrenheitToCelsius(double fahrenheit)
+        {
+            return (fahrenheit - 32) * 5 / 9;
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            TemperatureConverter converter = new TemperatureConverter(25);
+
+            Console.WriteLine($"Celsius: {converter.Celsius} Fahrenheit: {converter.Fahrenheit}");
+
+            converter.Fahrenheit = 46;
+            Console.WriteLine($"Celsius: {converter.Celsius}, Fahrenheit: {converter.Fahrenheit}");
+
+            converter.Celsius = 4;
+            Console.WriteLine($"Celsius: {converter.Celsius}, Fahrenheit: {converter.Fahrenheit}");
+            Console.ReadKey();
+        }
+    }
+}
